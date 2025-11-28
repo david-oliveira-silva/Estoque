@@ -2,15 +2,15 @@
 
 namespace DOMAIN.Model
 {
-    public class Produto
+    public class ProdutoModel
     {
         public int CodigoProduto;
         public string? NomeProduto;
         public double ValorProduto;
         public DisponibilidadeEnum Disponibilidade;
-        public Produto() { }
+        public ProdutoModel() { }
 
-        public Produto(string? NomeProduto, double ValorProduto,DisponibilidadeEnum Disponibilidade)
+        public ProdutoModel(string? NomeProduto, double ValorProduto,DisponibilidadeEnum Disponibilidade)
         {
             this.NomeProduto = NomeProduto;
             this.ValorProduto = ValorProduto;

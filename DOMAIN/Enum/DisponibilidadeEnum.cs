@@ -1,4 +1,4 @@
-﻿namespace DOMAIN.Model
+﻿namespace DOMAIN.Enum
 {
     public enum DisponibilidadeEnum
     {
