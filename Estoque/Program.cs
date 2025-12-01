@@ -1,3 +1,6 @@
+using REPOSITORY.Produto;
+using SERVICE.Produto;
+
 namespace Estoque
 {
     public class Program
@@ -18,6 +21,9 @@ namespace Estoque
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
+            builder.Services.AddScoped<IProdutoRepository, ProdutoRepository>();
+            builder.Services.AddScoped<ProdutoService, ProdutoService>();
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
