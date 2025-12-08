@@ -1,0 +1,46 @@
+﻿@using DOMAIN.Enum
+@using DOMAIN.Model
+
+@model ProdutoModel
+@{
+	ViewData["Title"] = "Cadastro de produtos";
+}
+
+@if (TempData["Sucesso"] != null)
+{
+	<p class="alert alert-success">@TempData["Sucesso"]</p>
+}
+@if (TempData["Erro"] != null)
+{
+	<p class="alert alert-danger">@TempData["Erro"]</p>
+}
+
+<form asp-asp-controller="Produto" asp-action="CadastrarProduto" method="post">
+	<div class="Produtos">
+		<div class="col">
+			<label for="NomeProduto">Nome Produto</label>
+			<input type="text" class="form-control" name="NomeProduto" placeholder="Nome do produto">
+		</div>
+		<div class="col">
+			<label for="ValorProduto">Valor do Produto</label>
+			<input type="number" class="form-control" name="ValorProduto" placeholder="Valor do produto">
+		</div>
+		<div class="col">
+			<label for="Disponibilidade">Disponibilidade</label>
+
+			<select name="Disponibilidade" class="form-control">
+				@foreach (DisponibilidadeEnum disponibilidade in Enum.GetValues(typeof(DisponibilidadeEnum)))
+				{
+					<option value="disponibilidade">@disponibilidade</option>
+				}
+			</select>
+		</div>
+		<div id="Botoes">
+
+			<button type="submit" class="btn btn-primary">Cadastrar</button>
+
+			<a class="btn btn-success" asp-asp-controller="Produto" asp-action="ListarProdutos" method="get">Voltar</a>
+		</div>
+
+	</div>
+</form>

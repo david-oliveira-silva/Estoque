@@ -23,7 +23,7 @@ namespace REPOSITORY.Data
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                throw new InvalidOperationException($"Erro ao abrir a conexão Firebird. Verifique a string de conexão e o status do servidor. Erro detalhado: {ex.Message}", ex);
             }
         }
 

@@ -1,3 +1,4 @@
+using REPOSITORY.Data;
 using REPOSITORY.Produto;
 using SERVICE.Produto;
 
@@ -9,9 +10,20 @@ namespace Estoque
         {
             var builder = WebApplication.CreateBuilder(args);
 
+            string? conexaoString = builder.Configuration.GetConnectionString("FirebirdConnection");
+
+            if (string.IsNullOrEmpty(conexaoString))
+            {
+                throw new InvalidOperationException("A string de conexão 'FirebirdConnection' não foi encontrada nas configurações.");
+            }
+            FirebirdConnection.Inicializar(conexaoString);
+
             // Add services to the container.
             builder.Services.AddControllersWithViews();
 
+            builder.Services.AddScoped<IProdutoRepository, ProdutoRepository>();
+            builder.Services.AddScoped<ProdutoService, ProdutoService>();
+          
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -22,8 +34,6 @@ namespace Estoque
                 app.UseHsts();
             }
 
-            builder.Services.AddScoped<IProdutoRepository, ProdutoRepository>();
-            builder.Services.AddScoped<ProdutoService, ProdutoService>();
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
@@ -34,7 +44,7 @@ namespace Estoque
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
+                pattern: "{controller=Produto}/{action=ListarProdutos}/{id?}");
 
             app.Run();
         }
