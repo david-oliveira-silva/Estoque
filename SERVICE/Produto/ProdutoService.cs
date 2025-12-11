@@ -7,7 +7,7 @@ public class ProdutoService(IProdutoRepository produtoRepository)
 {
     private readonly IProdutoRepository _produtoRepository = produtoRepository;
 
-    public void CadastrarProduto(string NomeProduto, double ValorProduto, DisponibilidadeEnum Disponibilidade)
+    public void CadastrarProduto(string NomeProduto, decimal ValorProduto, DisponibilidadeEnum Disponibilidade)
     {
         if (string.IsNullOrWhiteSpace(NomeProduto))
         {

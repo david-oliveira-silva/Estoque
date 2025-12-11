@@ -1,6 +1,8 @@
+using Microsoft.AspNetCore.Localization;
 using REPOSITORY.Data;
 using REPOSITORY.Produto;
 using SERVICE.Produto;
+using System.Globalization;
 
 namespace Estoque
 {
@@ -9,6 +11,16 @@ namespace Estoque
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+
+            builder.Services.Configure<RequestLocalizationOptions>(options =>
+            {
+                var defaultCulture = new CultureInfo("pt-BR");
+                var supportedCultures = new[] { defaultCulture };
+
+                options.DefaultRequestCulture = new RequestCulture(defaultCulture);
+                options.SupportedCultures = supportedCultures;
+                options.SupportedUICultures = supportedCultures;
+            });
 
             string? conexaoString = builder.Configuration.GetConnectionString("FirebirdConnection");
 
@@ -25,6 +37,7 @@ namespace Estoque
             builder.Services.AddScoped<ProdutoService, ProdutoService>();
           
             var app = builder.Build();
+            app.UseRequestLocalization();
 
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())

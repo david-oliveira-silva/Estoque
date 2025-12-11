@@ -4,13 +4,13 @@ namespace DOMAIN.Model
 {
     public class ProdutoModel
     {
-        public int CodigoProduto;
-        public string? NomeProduto;
-        public double ValorProduto;
-        public DisponibilidadeEnum Disponibilidade;
+        public int CodigoProduto { get; set;}
+        public string? NomeProduto { get; set; }
+        public decimal ValorProduto { get; set; }
+        public DisponibilidadeEnum Disponibilidade { get; set; }
         public ProdutoModel() { }
 
-        public ProdutoModel(string? NomeProduto, double ValorProduto,DisponibilidadeEnum Disponibilidade)
+        public ProdutoModel(string? NomeProduto, decimal ValorProduto,DisponibilidadeEnum Disponibilidade)
         {
             this.NomeProduto = NomeProduto;
             this.ValorProduto = ValorProduto;

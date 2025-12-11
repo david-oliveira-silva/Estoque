@@ -97,7 +97,7 @@ namespace REPOSITORY.Produto
                     ProdutoModel produto = new() {
                         CodigoProduto = Reader.GetInt32(CodigoOrdinal),
                         NomeProduto = Reader.GetString(NomeOrdinal),
-                        ValorProduto = Reader.GetDouble(ValorOrdinal),
+                        ValorProduto = Reader.GetDecimal(ValorOrdinal),
                         Disponibilidade = (DisponibilidadeEnum)Reader.GetInt32(DisponibilidadeOrdinal)
                     };
                     ListaProdutos.Add(produto);
