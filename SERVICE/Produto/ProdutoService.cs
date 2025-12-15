@@ -42,13 +42,17 @@ public class ProdutoService(IProdutoRepository produtoRepository)
         {
             throw new Exception("Produto não encontrado");
         }
+        if(produtoModel.CodigoProduto == 0)
+        {
+            throw new Exception("Produto não encontrado");
+        }
         _produtoRepository.Deletar(produtoModel);
     }
 
     public List<ProdutoModel> ListarProdutos()
     {
         List<ProdutoModel> ProdutosList =  _produtoRepository.Listar();
-        ProdutosList = [.. ProdutosList.OrderBy(p => p.NomeProduto)];
+        ProdutosList = [.. ProdutosList.OrderBy(p => p.CodigoProduto)];
         return ProdutosList;
     }
     public ProdutoModel? BuscarProduto(int? codigo)

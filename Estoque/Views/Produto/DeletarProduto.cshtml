@@ -19,13 +19,17 @@
 	<h1> Deletar produtos</h1>
 </div>
 
-<form asp-controller="Produto" asp-action="CadastrarProduto" method="post">
+<form asp-controller="Produto" asp-action="DeletarProduto" method="post">
 	<div class="Produtos">
 
-		<input type="hidden" asp-for="CodigoProduto" />
+		<input type="hidden" asp-for="CodigoProduto" value="@Model.CodigoProduto" />
+		<div class="col">
+			<label asp-for="CodigoProduto">Codigo do produto</label>
+			<input asp-for="CodigoProduto" class="form-control" disabled>
+		</div>
 
 		<div class="col">
-			<label asp-for="NomeProduto">Nome Produto</label>
+			<label asp-for="NomeProduto">Nome do Produto</label>
 			<input asp-for="NomeProduto" type="text" class="form-control" disabled>
 		</div>
 		<div class="col">

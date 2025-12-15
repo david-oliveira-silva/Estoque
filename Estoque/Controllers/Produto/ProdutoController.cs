@@ -42,21 +42,36 @@ namespace Web.Controllers.Produto
                 return View(produtoModel);
             }
         }
-      
-        [HttpGet]
-        public IActionResult DeletarProduto(int codigo) // Recebe apenas o código (ID)
-        {
-            ProdutoModel produto = produtoService.BuscarProduto(codigo);
 
-    
+        [HttpGet]
+        public IActionResult DeletarProduto(int codigo)
+        {
+            ProdutoModel? produto = produtoService.BuscarProduto(codigo);
+
+
             if (produto == null)
             {
                 TempData["Erro"] = "Produto não encontrado.";
-                return RedirectToAction("ListarProdutos"); // Redireciona para a listagem
+                return RedirectToAction("ListarProdutos");
             }
 
-       
             return View(produto);
+        }
+
+        [HttpPost]
+        public IActionResult DeletarProduto(ProdutoModel produtoModel)
+        {
+            try
+            {
+                produtoService.DeletarProduto(produtoModel);
+                TempData["Sucesso"] = "Produto deletado com sucesso";
+                return RedirectToAction("ListarProdutos");
+            }
+            catch (Exception ex)
+            {
+                TempData["Erro"] = ex.Message;
+                return View(produtoModel);
+            }
         }
         [HttpGet]
         public IActionResult ListarProdutos()

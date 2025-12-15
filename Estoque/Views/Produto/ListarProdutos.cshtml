@@ -18,7 +18,7 @@
 
 	<h1>Lista de produtos</h1>
 
-	<a class="CadastrarProdutos btn btn-primary" asp-controller="Produto" asp-action="UpsertProduto">Cadastrar Produto</a>
+	<a class="CadastrarProdutos btn btn-primary fw-bold" asp-controller="Produto" asp-action="UpsertProduto">Cadastrar Produto</a>
 
 </div>
 
@@ -38,11 +38,11 @@
 			<tr>
 				<th>@p.CodigoProduto</th>
 				<td>@p.NomeProduto</td>
-				<td>@p.ValorProduto</td>
+				<td>@p.ValorProduto R$</td>
 				<td>@p.Disponibilidade</td>
 				<td>
-					<a class="btn btn-primary" asp-controller="" asp-action="">Editar</a>
-					<a class="btn btn-danger" asp-controller="Produto" asp-action="DeletarProduto">Deletar</a>
+					<a class="btn btn-primary fw-bold" asp-controller="" asp-action="">Editar</a>
+					<a class="btn btn-danger fw-bold" asp-controller="Produto" asp-action="DeletarProduto" asp-route-codigo="@p.CodigoProduto">Deletar</a>
 				</td>
 			</tr>
 

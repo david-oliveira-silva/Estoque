@@ -4,7 +4,7 @@ using REPOSITORY.Produto;
 using SERVICE.Produto;
 using System.Globalization;
 
-namespace Estoque
+namespace Web
 {
     public class Program
     {
