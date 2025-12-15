@@ -10,28 +10,53 @@ namespace Web.Controllers.Produto
         private readonly ProdutoService produtoService = produtoService;
 
         [HttpGet]
-        public IActionResult CadastrarProduto()
+        public IActionResult UpsertProduto(int? codigo)
         {
-            return View();  
+
+            if (codigo.HasValue)
+            {
+                produtoService.BuscarProduto(codigo.Value);
+            }
+
+
+            return View();
         }
 
         [HttpPost]
-        public IActionResult CadastrarProduto(ProdutoModel produtoModel) {
+        public IActionResult CadastrarProduto(ProdutoModel produtoModel)
+        {
 
             try
             {
-                List<DisponibilidadeEnum> disponibilidade = [..Enum.GetValues(typeof(DisponibilidadeEnum)).Cast<DisponibilidadeEnum>()];
+                List<DisponibilidadeEnum> disponibilidade = [.. Enum.GetValues(typeof(DisponibilidadeEnum)).Cast<DisponibilidadeEnum>()];
                 ViewBag.disponibilidade = disponibilidade;
 
                 produtoService.CadastrarProduto(produtoModel.NomeProduto!, produtoModel.ValorProduto, produtoModel.Disponibilidade);
                 TempData["Sucesso"] = "Produto cadastrado com sucesso";
-                return View(produtoModel);
+                return RedirectToAction("ListarProdutos");
 
-            }catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 TempData["Erro"] = ex.Message;
                 return View(produtoModel);
             }
+        }
+      
+        [HttpGet]
+        public IActionResult DeletarProduto(int codigo) // Recebe apenas o código (ID)
+        {
+            ProdutoModel produto = produtoService.BuscarProduto(codigo);
+
+    
+            if (produto == null)
+            {
+                TempData["Erro"] = "Produto não encontrado.";
+                return RedirectToAction("ListarProdutos"); // Redireciona para a listagem
+            }
+
+       
+            return View(produto);
         }
         [HttpGet]
         public IActionResult ListarProdutos()

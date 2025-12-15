@@ -2,40 +2,50 @@
 
 @model List<ProdutoModel>
 @{
-    ViewData["Title"] = "Lista de produtos"; 
+	ViewData["Title"] = "Lista de produtos";
 }
 
-@if(TempData["Sucesso"] != null)
+@if (TempData["Sucesso"] != null)
 {
-    <p class="alert alert-success">@TempData["Sucesso"]</p>
+	<p class="alert alert-success">@TempData["Sucesso"]</p>
 }
 @if (TempData["Erro"] != null)
 {
-    <p class="alert alert-danger">@TempData["Erro"]</p>
+	<p class="alert alert-danger">@TempData["Erro"]</p>
 }
 
+<div class="Titulo d-flex justify-content-md-between m-3">
+
+	<h1>Lista de produtos</h1>
+
+	<a class="CadastrarProdutos btn btn-primary" asp-controller="Produto" asp-action="UpsertProduto">Cadastrar Produto</a>
+
+</div>
+
 <table class="table">
-    <thead>
-        <tr class="table table-dark">
-            <th scope="col">Codigo</th>
-            <th scope="col">Nome</th>
-            <th scope="col">Valor</th>
-            <th scope="col">Disponibilidade</th>
-            <th scope="col">Opções</th>
-        </tr>
-    </thead>
-    @foreach (var p in Model){
-    <tbody>
-        <tr>
-            <th>@p.CodigoProduto</th>
-            <td>@p.NomeProduto</td>
-            <td>@p.ValorProduto</td>
-            <td>@p.Disponibilidade</td>
-            <td>
-                <a class="btn btn-primary" asp-controller = "Produto" asp-action="CadastrarProduto">Cadastrar</a>
-            </td>
-        </tr>
-      
-    </tbody>
-        }
+	<thead>
+		<tr class="table table-dark">
+			<th scope="col">Codigo</th>
+			<th scope="col">Nome</th>
+			<th scope="col">Valor</th>
+			<th scope="col">Disponibilidade</th>
+			<th scope="col">Opções</th>
+		</tr>
+	</thead>
+	@foreach (var p in Model)
+	{
+		<tbody>
+			<tr>
+				<th>@p.CodigoProduto</th>
+				<td>@p.NomeProduto</td>
+				<td>@p.ValorProduto</td>
+				<td>@p.Disponibilidade</td>
+				<td>
+					<a class="btn btn-primary" asp-controller="" asp-action="">Editar</a>
+					<a class="btn btn-danger" asp-controller="Produto" asp-action="DeletarProduto">Deletar</a>
+				</td>
+			</tr>
+
+		</tbody>
+	}
 </table>

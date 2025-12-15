@@ -51,4 +51,10 @@ public class ProdutoService(IProdutoRepository produtoRepository)
         ProdutosList = [.. ProdutosList.OrderBy(p => p.NomeProduto)];
         return ProdutosList;
     }
+    public ProdutoModel? BuscarProduto(int? codigo)
+    {
+        ProdutoModel? produto = _produtoRepository.Listar().FirstOrDefault(p => p.CodigoProduto == codigo);
+        return produto;
+        
+    }
 }

@@ -3,7 +3,7 @@
 
 @model ProdutoModel
 @{
-	ViewData["Title"] = "Cadastro de produtos";
+	ViewData["Title"] = "Deletar produtos";
 }
 
 @if (TempData["Sucesso"] != null)
@@ -15,31 +15,39 @@
 	<p class="alert alert-danger">@TempData["Erro"]</p>
 }
 
+<div class="Titulo d-flex justify-content-center">
+	<h1> Deletar produtos</h1>
+</div>
+
 <form asp-controller="Produto" asp-action="CadastrarProduto" method="post">
 	<div class="Produtos">
+
+		<input type="hidden" asp-for="CodigoProduto" />
+
 		<div class="col">
 			<label asp-for="NomeProduto">Nome Produto</label>
-			<input asp-for="NomeProduto" type="text" class="form-control" placeholder="Nome do produto">
+			<input asp-for="NomeProduto" type="text" class="form-control" disabled>
 		</div>
 		<div class="col">
 			<label asp-for="ValorProduto">Valor do Produto</label>
-			<input asp-for="ValorProduto" type="number" class="form-control" placeholder="Valor do produto" step="0.01">
+			<input asp-for="ValorProduto" type="number" class="form-control" disabled>
 		</div>
 		<div class="col">
 			<label asp-for="Disponibilidade">Disponibilidade</label>
 
-			<select asp-for="Disponibilidade" class="form-control">
+			<select asp-for="Disponibilidade" class="form-control" disabled>
+				<option disabled selected style="color: gray;">Selecione</option>
 				@foreach (DisponibilidadeEnum disponibilidade in Enum.GetValues(typeof(DisponibilidadeEnum)))
 				{
 					<option value="@disponibilidade">@disponibilidade</option>
 				}
 			</select>
 		</div>
-		<div id="Botoes">
+		<div id="Botoes" class="m-3 d-flex flex-row justify-content-center gap-3">
 
-			<button type="submit" class="btn btn-primary">Cadastrar</button>
+			<button type="submit" class="btn btn-danger" style="width:250px">Deletar</button>
 
-			<a class="btn btn-success" asp-controller="Produto" asp-action="ListarProdutos" method="get">Voltar</a>
+			<a class="btn btn-success" style="width:250px" asp-controller="Produto" asp-action="ListarProdutos" method="get">Voltar</a>
 		</div>
 
 	</div>
