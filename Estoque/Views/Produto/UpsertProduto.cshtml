@@ -16,10 +16,10 @@
 }
 
 <div class="Titulo d-flex justify-content-center">
-	<h1> Casdastrar produto</h1>
+	<h1> @(Model.CodigoProduto == 0 ? "Cadastro de Produto" : "Edição de Produto") </h1>
 </div>
 
-<form asp-controller="Produto" asp-action="CadastrarProduto" method="post">
+<form asp-controller="Produto" asp-action="@(Model.CodigoProduto == 0 ? "CadastrarProduto" : "EditarProduto")" method="post">
 	<div class="Produtos">
 
 		<div class="col">
@@ -43,7 +43,7 @@
 		</div>
 		<div id="Botoes" class="m-3 d-flex flex-row justify-content-center gap-3">
 
-			<button type="submit" class="btn btn-primary" style="width:250px">Cadastrar</button>
+			<button type="submit" class="btn btn-primary" style="width:250px">@(Model.CodigoProduto == 0 ? "Cadastrar" : "Editar")</button>
 
 			<a class="btn btn-success" style="width:250px" asp-controller="Produto" asp-action="ListarProdutos" method="get">Voltar</a>
 		</div>

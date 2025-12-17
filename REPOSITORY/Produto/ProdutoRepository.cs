@@ -41,7 +41,7 @@ namespace REPOSITORY.Produto
             {
                 FirebirdConnection.OpenConnection(fbConnection);
 
-                string queryUpdate = "UPDATE PRODUTOS SET NomeProduto = @NomeProduto,ValorProduto = @ValorProduto, Disponibilidade = @Disponibilidade WHERE CodigoProduto = @CodigoProduto";
+                string queryUpdate = "UPDATE PRODUTOS SET NomeProduto = @NomeProduto,ValorProduto = @ValorProduto, Disponibilidade = @Disponivel WHERE CodigoProduto = @CodigoProduto";
 
                 using FbCommand cmdUpdate = new(queryUpdate, fbConnection);
 

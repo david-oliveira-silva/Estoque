@@ -12,14 +12,16 @@ namespace Web.Controllers.Produto
         [HttpGet]
         public IActionResult UpsertProduto(int? codigo)
         {
-
+            ProdutoModel? produto;
             if (codigo.HasValue)
             {
-                produtoService.BuscarProduto(codigo.Value);
+                produto = produtoService.BuscarProduto(codigo.Value);
             }
-
-
-            return View();
+            else
+            {
+                produto = new ProdutoModel();
+            }
+            return View(produto);
         }
 
         [HttpPost]
@@ -39,8 +41,23 @@ namespace Web.Controllers.Produto
             catch (Exception ex)
             {
                 TempData["Erro"] = ex.Message;
-                return View(produtoModel);
+                return View("UpsertProduto", produtoModel);
             }
+        }
+
+        public IActionResult EditarProduto(ProdutoModel produtoModel)
+        {
+            try
+            {
+                produtoService.EditarProduto(produtoModel);
+                return RedirectToAction("ListarProdutos");
+            }
+            catch (Exception ex)
+            {
+                TempData["Erro"] = ex.Message;
+                 View("UpsertProduto", produtoModel);
+            }
+            return View("UpsertProduto", produtoModel);
         }
 
         [HttpGet]

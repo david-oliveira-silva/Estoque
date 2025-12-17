@@ -41,7 +41,7 @@
 				<td>@p.ValorProduto R$</td>
 				<td>@p.Disponibilidade</td>
 				<td>
-					<a class="btn btn-primary fw-bold" asp-controller="" asp-action="">Editar</a>
+					<a class="btn btn-primary fw-bold" asp-controller="Produto" asp-action="UpsertProduto" asp-route-codigo="@p.CodigoProduto">Editar</a>
 					<a class="btn btn-danger fw-bold" asp-controller="Produto" asp-action="DeletarProduto" asp-route-codigo="@p.CodigoProduto">Deletar</a>
 				</td>
 			</tr>
