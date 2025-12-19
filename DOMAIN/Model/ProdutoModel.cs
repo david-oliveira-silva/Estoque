@@ -6,11 +6,11 @@ namespace DOMAIN.Model
     {
         public int CodigoProduto { get; set;}
         public string? NomeProduto { get; set; }
-        public decimal ValorProduto { get; set; }
-        public DisponibilidadeEnum Disponibilidade { get; set; }
+        public decimal? ValorProduto { get; set; }
+        public DisponibilidadeEnum? Disponibilidade { get; set; }
         public ProdutoModel() { }
 
-        public ProdutoModel(string? NomeProduto, decimal ValorProduto,DisponibilidadeEnum Disponibilidade)
+        public ProdutoModel(string? NomeProduto, decimal? ValorProduto,DisponibilidadeEnum? Disponibilidade)
         {
             this.NomeProduto = NomeProduto;
             this.ValorProduto = ValorProduto;

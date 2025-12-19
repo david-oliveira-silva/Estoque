@@ -25,7 +25,7 @@ namespace Web.Controllers.Produto
         }
 
         [HttpPost]
-        public IActionResult CadastrarProduto(ProdutoModel produtoModel)
+        public IActionResult CadastrarProduto(ProdutoModel produto)
         {
 
             try
@@ -33,7 +33,7 @@ namespace Web.Controllers.Produto
                 List<DisponibilidadeEnum> disponibilidade = [.. Enum.GetValues(typeof(DisponibilidadeEnum)).Cast<DisponibilidadeEnum>()];
                 ViewBag.disponibilidade = disponibilidade;
 
-                produtoService.CadastrarProduto(produtoModel.NomeProduto!, produtoModel.ValorProduto, produtoModel.Disponibilidade);
+                produtoService.CadastrarProduto(produto);
                 TempData["Sucesso"] = "Produto cadastrado com sucesso";
                 return RedirectToAction("ListarProdutos");
 
@@ -41,23 +41,23 @@ namespace Web.Controllers.Produto
             catch (Exception ex)
             {
                 TempData["Erro"] = ex.Message;
-                return View("UpsertProduto", produtoModel);
+                return View("UpsertProduto", produto);
             }
         }
 
-        public IActionResult EditarProduto(ProdutoModel produtoModel)
+        public IActionResult EditarProduto(ProdutoModel produto)
         {
             try
             {
-                produtoService.EditarProduto(produtoModel);
+                produtoService.EditarProduto(produto);
                 return RedirectToAction("ListarProdutos");
             }
             catch (Exception ex)
             {
                 TempData["Erro"] = ex.Message;
-                 View("UpsertProduto", produtoModel);
+                 View("UpsertProduto", produto);
             }
-            return View("UpsertProduto", produtoModel);
+            return View("UpsertProduto", produto);
         }
 
         [HttpGet]
@@ -76,18 +76,18 @@ namespace Web.Controllers.Produto
         }
 
         [HttpPost]
-        public IActionResult DeletarProduto(ProdutoModel produtoModel)
+        public IActionResult DeletarProduto(ProdutoModel produto)
         {
             try
             {
-                produtoService.DeletarProduto(produtoModel);
+                produtoService.DeletarProduto(produto);
                 TempData["Sucesso"] = "Produto deletado com sucesso";
                 return RedirectToAction("ListarProdutos");
             }
             catch (Exception ex)
             {
                 TempData["Erro"] = ex.Message;
-                return View(produtoModel);
+                return View(produto);
             }
         }
         [HttpGet]

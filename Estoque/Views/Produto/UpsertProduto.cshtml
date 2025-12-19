@@ -20,6 +20,7 @@
 </div>
 
 <form asp-controller="Produto" asp-action="@(Model.CodigoProduto == 0 ? "CadastrarProduto" : "EditarProduto")" method="post">
+	<input type="hidden" asp-for="CodigoProduto" />
 	<div class="Produtos">
 
 		<div class="col">

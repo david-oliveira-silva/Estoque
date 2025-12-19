@@ -1,7 +1,7 @@
 ﻿
 using DOMAIN.Model;
 
-namespace DOMAIN.Extensions
+namespace DOMAIN.Extensoes
 {
     public  static class ProdutoExtensao
     {
