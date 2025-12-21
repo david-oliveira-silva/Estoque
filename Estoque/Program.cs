@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Localization;
 using REPOSITORY.Data;
+using REPOSITORY.Estoque;
 using REPOSITORY.Produto;
+using SERVICE.Estoque;
 using SERVICE.Produto;
 using System.Globalization;
 
@@ -30,12 +32,15 @@ namespace Web
             }
             FirebirdConnection.Inicializar(conexaoString);
 
-            // Add services to the container.
+
             builder.Services.AddControllersWithViews();
 
             builder.Services.AddScoped<IProdutoRepository, ProdutoRepository>();
             builder.Services.AddScoped<ProdutoService, ProdutoService>();
-          
+
+            builder.Services.AddScoped<IEstoqueRepository, EstoqueRepository>();
+            builder.Services.AddScoped<EstoqueService, EstoqueService>();
+
             var app = builder.Build();
             app.UseRequestLocalization();
 

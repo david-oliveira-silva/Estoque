@@ -1,0 +1,38 @@
+﻿@using DOMAIN.Model
+@model ViewModel;
+@{
+}
+
+@if (TempData["Sucesso"] != null)
+{
+	<p class="alert alert-success">@TempData["Sucesso"]</p>
+}
+@if (TempData["Erro"] != null)
+{
+	<p class="alert alert-danger">@TempData["Erro"]</p>
+}
+
+<form asp-controller="Estoque" asp-action="CadastrarEstoque" method="post">
+
+	<div class="">
+
+		<div class="col">
+			<label asp-for="Estoque.CodigoProduto">Produtos</label>
+
+			<select asp-for="Estoque.CodigoProduto" class="form-control">
+				<option disabled selected style="color: gray;">Selecione</option>
+				@foreach (ProdutoModel produto in Model.Produto)
+				{
+					<option value="@produto.CodigoProduto">@produto.NomeProduto</option>
+				}
+			</select>
+		</div>
+
+		<div id="Botoes" class="m-3 d-flex flex-row justify-content-center gap-3">
+
+			<button type="submit" class="btn btn-primary" style="width:250px">Cadastrar</button>
+
+			<a class="btn btn-success" style="width:250px" asp-controller="Estoque" asp-action="ListarEstoque" method="get">Voltar</a>
+		</div>
+	</div>
+</form>

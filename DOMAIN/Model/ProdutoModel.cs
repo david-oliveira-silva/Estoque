@@ -16,5 +16,6 @@ namespace DOMAIN.Model
             this.ValorProduto = ValorProduto;
             this.Disponibilidade = Disponibilidade;
         }
+
     }
 }
