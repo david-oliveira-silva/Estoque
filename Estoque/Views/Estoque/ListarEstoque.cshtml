@@ -7,27 +7,30 @@
 <div class="d-flex justify-content-between Titulo m-3">
 
 	<h1>Estoque Produtos</h1>
-	
-	<a class="btn btn-primary" asp-controller="Estoque" asp-action="CadastrarEstoque">Adicionar Estoque</a>
+
+	<a class="btn btn-primary fw-bold" asp-controller="Estoque" asp-action="CadastrarEstoque" style="height:45px">Adicionar Estoque</a>
 </div>
 
 <table class="table">
 	<thead>
-			<tr class="table-dark">
-			<th scope="col">Codigo</th>
-			<th scope="col">Produto</th>
-			<th scope="col">Quantidade</th>
-			<th scope="col">Opções</th>
+		<tr class="table-dark">
+			<th class="text-center" scope="col">Codigo</th>
+			<th class="text-center" scope="col">Produto</th>
+			<th class="text-center" scope="col">Quantidade</th>
+			<th class="text-center" scope="col">Opções</th>
 		</tr>
 	</thead>
 	@foreach (EstoqueModel e in Model)
 	{
 		<tbody>
 			<tr>
-				<th scope="row">@e.CodigoEstoque</th>
-				<td>@e.Produto?.NomeProduto</td>
-				<td>@e.QuantidadeEstoque</td>
-				<td>opções a fazer</td>
+				<th class="text-center" scope="row">@e.CodigoEstoque</th>
+				<td class="text-center">@e.Produto?.NomeProduto</td>
+				<td class="text-center">@e.QuantidadeEstoque</td>
+				<td class="text-center">
+					<a class="btn btn-primary fw-bold text-center">Editar</a>
+					<a class="btn btn-danger fw-bold text-center">Deletar</a>
+				</td>
 			</tr>
 		</tbody>
 	}

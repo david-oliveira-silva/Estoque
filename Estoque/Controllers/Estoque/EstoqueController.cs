@@ -13,24 +13,11 @@ namespace Web.Controllers.Estoque
         [HttpGet]
         public IActionResult CadastrarEstoque()
         {
-            try
+            ViewModel viewModel = new()
             {
-                ViewModel viewModel = new()
-                {
-                    Produto = _produtoService.ListarProdutos()
-                };
-                TempData["Sucesso"] = "Estoque cadastrado com sucesso";
-                return View(viewModel);
-            }
-            catch (Exception ex)
-            {
-                ViewModel viewModel = new()
-                {
-                    Produto = _produtoService.ListarProdutos()
-                };
-                TempData["Erro"] = ex.Message;
-                return View(viewModel);
-            }
+                Produto = _produtoService.ListarProdutos()
+            };
+            return View(viewModel);
         }
         [HttpPost]
         public IActionResult CadastrarEstoque(ViewModel? viewModel)

@@ -33,14 +33,26 @@ namespace REPOSITORY.Estoque
             }
         }
 
-        public void Deletar(EstoqueModel Entity)
+        public void Deletar(EstoqueModel estoqueModel)
         {
-            throw new NotImplementedException();
+            try
+            {
+                FirebirdConnection.OpenConnection(fbConnection);
+
+                string QueryDelete = "DELETE FROM ESTOQUE WHERE CodigoEstoque = @CodigoEstoque";
+                using FbCommand cmdDelete = new(QueryDelete, fbConnection);
+                cmdDelete.Parameters.AddWithValue(@"CodigoEstoque", estoqueModel.CodigoEstoque);
+                cmdDelete.ExecuteNonQuery();
+            }
+            finally
+            {
+                FirebirdConnection.CloseConnection(fbConnection);
+            }
         }
 
         public void Editar(EstoqueModel Entity)
         {
-            throw new NotImplementedException();
+            
         }
 
         public List<EstoqueModel> Listar()

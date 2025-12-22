@@ -14,8 +14,9 @@
 
 <form asp-controller="Estoque" asp-action="CadastrarEstoque" method="post">
 
-	<div class="">
-
+	<div class="Titulo m-2 text-center">
+		<h1>Cadastrar Estoque</h1>
+	</div>
 		<div class="col">
 			<label asp-for="Estoque.CodigoProduto">Produtos</label>
 
@@ -34,5 +35,5 @@
 
 			<a class="btn btn-success" style="width:250px" asp-controller="Estoque" asp-action="ListarEstoque" method="get">Voltar</a>
 		</div>
-	</div>
+
 </form>

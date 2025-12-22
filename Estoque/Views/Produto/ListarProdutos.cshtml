@@ -18,30 +18,29 @@
 
 	<h1>Lista de produtos</h1>
 
-	<a class="CadastrarProdutos btn btn-primary fw-bold" asp-controller="Produto" asp-action="UpsertProduto">Cadastrar Produto</a>
+	<a class="CadastrarProdutos btn btn-primary fw-bold" asp-controller="Produto" asp-action="UpsertProduto" style="height:45px">Cadastrar Produto</a>
 
 </div>
-
 
 <table class="table">
 	<thead>
 		<tr class="table table-dark">
-			<th scope="col">Codigo</th>
-				<th scope="col">Nome</th>
-			<th scope="col">Valor</th>
-			<th scope="col">Disponibilidade</th>
-			<th scope="col">Opções</th>
+			<th class="text-center" scope="col">Codigo</th>
+			<th class="text-center" scope="col">Nome</th>
+			<th class="text-center" scope="col">Valor</th>
+			<th class="text-center" scope="col">Disponibilidade</th>
+			<th class="text-center" scope="col">Opções</th>
 		</tr>
 	</thead>
 	@foreach (var p in Model)
 	{
 		<tbody>
 			<tr>
-				<th>@p.CodigoProduto</th>
-				<td>@p.NomeProduto</td>
-				<td>@p.ValorProduto R$</td>
-				<td>@p.Disponibilidade</td>
-				<td>
+				<th class="text-center">@p.CodigoProduto</th>
+				<td class="text-center">@p.NomeProduto</td>
+				<td class="text-center">@p.ValorProduto R$</td>
+				<td class="text-center">@p.Disponibilidade</td>
+				<td class="text-center">
 					<a class="btn btn-primary fw-bold" asp-controller="Produto" asp-action="UpsertProduto" asp-route-codigo="@p.CodigoProduto">Editar</a>
 					<a class="btn btn-danger fw-bold" asp-controller="Produto" asp-action="DeletarProduto" asp-route-codigo="@p.CodigoProduto">Deletar</a>
 				</td>

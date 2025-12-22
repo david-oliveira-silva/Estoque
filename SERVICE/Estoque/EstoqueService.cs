@@ -11,6 +11,7 @@ namespace SERVICE.Estoque
         public void CadastrarEstoque(EstoqueModel? estoque)
         {
             estoque.ValidadarCadastro();
+           
             EstoqueModel? produtoExiste = _estoqueRepository.Listar().FirstOrDefault(e => e.CodigoProduto == estoque?.CodigoProduto);
 
             if (produtoExiste != null)
