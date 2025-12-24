@@ -3,6 +3,14 @@
 @{
 	ViewData["Title"] = "Estoque produtos";
 }
+@if (TempData["Sucesso"] != null)
+{
+	<p class="alert alert-success">@TempData["Sucesso"]</p>
+}
+@if (TempData["Erro"] != null)
+{
+	<p class="alert alert-danger">@TempData["Erro"]</p>
+}
 
 <div class="d-flex justify-content-between Titulo m-3">
 
@@ -29,7 +37,7 @@
 				<td class="text-center">@e.QuantidadeEstoque</td>
 				<td class="text-center">
 					<a class="btn btn-primary fw-bold text-center">Editar</a>
-					<a class="btn btn-danger fw-bold text-center">Deletar</a>
+					<a asp-controller="Estoque" asp-action="DeletarEstoque" class="btn btn-danger fw-bold text-center" asp-route-codigo ="@e.CodigoEstoque">Deletar</a>
 				</td>
 			</tr>
 		</tbody>

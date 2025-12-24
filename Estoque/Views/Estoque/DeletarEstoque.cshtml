@@ -1,0 +1,36 @@
+﻿@using DOMAIN.Model
+
+@model ViewModel
+@{
+	ViewData["Title"] = "Deletar estoque";
+}
+
+
+
+<form asp-controller="Estoque" asp-action="DeletarEstoque" method="post">
+	
+	<input type="hidden" asp-for="Estoque.CodigoEstoque" />
+	<div class="Titulo m-2 text-center">
+		<h1>Deletar Estoque</h1>
+	</div>
+		<div class="col">
+			
+		<div class="col">
+			<label asp-for="Estoque.CodigoEstoque">Produtos</label>
+			<input asp-for= "Estoque.Produto.NomeProduto" type="text" class="form-control" disabled>
+		</div
+		<div class="col">
+			<label asp-for="Estoque.CodigoEstoque">Produtos</label>
+			<input asp-for= "Estoque.QuantidadeEstoque" type="text" class="form-control" disabled>
+		</div>
+			
+		</div>
+
+		<div id="Botoes" class="m-3 d-flex flex-row justify-content-center gap-3">
+
+			<button type="submit" class="btn btn-danger" style="width:250px">Deletar</button>
+
+			<a class="btn btn-success" style="width:250px" asp-controller="Estoque" asp-action="ListarEstoque" method="get">Voltar</a>
+		</div>
+
+</form>

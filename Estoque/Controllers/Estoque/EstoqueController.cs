@@ -35,6 +35,36 @@ namespace Web.Controllers.Estoque
             }
 
         }
+
+        [HttpGet]
+        public IActionResult DeletarEstoque(int? codigo)
+        {
+            EstoqueModel? estoque = _estoqueService.BuscarEstoque(codigo);
+            ViewModel viewModel = new()
+            {
+                Estoque = estoque,
+                Produto = _produtoService.ListarProdutos() 
+            };
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        public IActionResult DeletarEstoque(ViewModel viewModel)
+        {
+            try
+            {
+                _estoqueService.DeletarEstoque(viewModel.Estoque);
+                TempData["Sucesso"] = "Estoque deletado com sucesso";
+                return RedirectToAction("ListarEstoque");
+            }
+            catch (Exception ex)
+            {
+                TempData["Erro"] = ex.Message;
+                return View(viewModel);
+
+            }
+        }
+
         public IActionResult ListarEstoque()
         {
             List<EstoqueModel> estoque = _estoqueService.ListarEstoque();

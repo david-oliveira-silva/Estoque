@@ -22,10 +22,22 @@ namespace SERVICE.Estoque
             _estoqueRepository.Cadastrar(estoque!);
         }
 
+        public void DeletarEstoque(EstoqueModel? estoque)
+        {
+            estoque.EstoqueExiste();
+            _estoqueRepository.Deletar(estoque!);
+        }
+
         public List<EstoqueModel> ListarEstoque()
         {
             List<EstoqueModel> estoque = _estoqueRepository.Listar();
             return [.. estoque.OrderBy(e => e.CodigoEstoque)];
+        }
+
+        public EstoqueModel? BuscarEstoque(int? codigo)
+        {
+           EstoqueModel? estoque = _estoqueRepository.Listar().FirstOrDefault(e => e.CodigoEstoque == codigo);
+            return estoque;
         }
     }
 }
