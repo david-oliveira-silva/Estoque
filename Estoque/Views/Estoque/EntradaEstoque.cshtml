@@ -1,0 +1,40 @@
+﻿@using DOMAIN.Model
+
+@model ViewModel
+@{
+	ViewData["Title"] = "Entrada Estoque";
+}
+@if (TempData["Erro"] != null)
+{
+	<p class="alert alert-danger">@TempData["Erro"]</p>
+}
+
+<div class="Titulo">
+	<h1>Entrada Estoque</h1>
+</div>
+
+
+<form asp-controller="Estoque" asp-action="EntradaEstoque" method="post">
+	<div class="mb-3">
+		<label class="form-label">Selecione o Produto</label>
+		<select name="codigo" class="form-select">
+			<option selected disabled>Escolha um produto para dar entrada...</option>
+			@foreach (var p in Model.Produto)
+			{
+				<option value="@p.CodigoProduto">@p.NomeProduto</option>
+			}
+		</select>
+	</div>
+	<div class="col">
+		<label name="quantidade">Quantidade</label>
+		<input name="quantidade" type="number" class="form-control">
+	</div>
+
+	<div id="Botoes" class="m-3 d-flex flex-row justify-content-center gap-3">
+
+		<button type="submit" class="btn btn-primary" style="width:250px">Confirmar</button>
+
+		<a class="btn btn-success" style="width:250px" asp-controller="Estoque" asp-action="ListarEstoque" method="get">Voltar</a>
+	</div>
+
+</form>

@@ -43,7 +43,7 @@ namespace Web.Controllers.Estoque
             ViewModel viewModel = new()
             {
                 Estoque = estoque,
-                Produto = _produtoService.ListarProdutos() 
+                Produto = _produtoService.ListarProdutos()
             };
             return View(viewModel);
         }
@@ -69,6 +69,37 @@ namespace Web.Controllers.Estoque
         {
             List<EstoqueModel> estoque = _estoqueService.ListarEstoque();
             return View(estoque);
+        }
+
+        [HttpGet]
+        public IActionResult EntradaEstoque()
+        {
+            ViewModel viewModel = new()
+            {
+                Produto = _produtoService.ListarProdutos()
+            };
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        public IActionResult EntradaEstoque(int codigo, int quantidade)
+        {
+            try
+            {
+                _estoqueService.Adicionar(codigo, quantidade);
+                TempData["Sucesso"] = $"Foi adicionado {quantidade} ao estoque";
+               return RedirectToAction("ListarEstoque");
+            }
+            catch (Exception ex)
+            {
+                TempData["Erro"] = ex.Message;
+                ViewModel viewModel = new()
+                {
+                    Produto = _produtoService.ListarProdutos()
+                };
+                return View(viewModel);
+            }
+           
         }
     }
 }

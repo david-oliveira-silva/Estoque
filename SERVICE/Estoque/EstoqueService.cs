@@ -11,7 +11,7 @@ namespace SERVICE.Estoque
         public void CadastrarEstoque(EstoqueModel? estoque)
         {
             estoque.ValidadarCadastro();
-           
+
             EstoqueModel? produtoExiste = _estoqueRepository.Listar().FirstOrDefault(e => e.CodigoProduto == estoque?.CodigoProduto);
 
             if (produtoExiste != null)
@@ -36,8 +36,23 @@ namespace SERVICE.Estoque
 
         public EstoqueModel? BuscarEstoque(int? codigo)
         {
-           EstoqueModel? estoque = _estoqueRepository.Listar().FirstOrDefault(e => e.CodigoEstoque == codigo);
+            EstoqueModel? estoque = _estoqueRepository.Listar().FirstOrDefault(e => e.CodigoEstoque == codigo);
             return estoque;
         }
+
+        public void Adicionar(int? codigo,int quantidade)
+        {
+            EstoqueModel? estoque = _estoqueRepository.Listar().FirstOrDefault(e => e?.Produto?.CodigoProduto == codigo) ?? throw new ArgumentException("Item de estoque não encontrado para atualização.");
+            estoque.QuantidadeEstoque += quantidade;
+            _estoqueRepository.Editar(estoque);
+        }
+
+        public void Remover(int quantidade, int? codigo)
+        {
+            EstoqueModel? estoque = BuscarEstoque(codigo) ?? throw new ArgumentException("Item de estoque não encontrado para atualização.");
+            estoque.QuantidadeEstoque -= quantidade;
+            _estoqueRepository.Editar(estoque);
+        }
     }
+
 }

@@ -13,6 +13,8 @@ namespace REPOSITORY.Estoque
             fbConnection = FirebirdConnection.GetFbConnection();
         }
 
+
+
         public void Cadastrar(EstoqueModel estoqueModel)
         {
             try
@@ -50,9 +52,24 @@ namespace REPOSITORY.Estoque
             }
         }
 
-        public void Editar(EstoqueModel Entity)
+        public void Editar(EstoqueModel estoqueModel)
         {
-            
+            try
+            {
+                FirebirdConnection.OpenConnection(fbConnection);
+
+                string QueryUpdate = "UPDATE ESTOQUE SET QuantidadeEstoque = @QuantidadeEstoque WHERE CodigoEstoque = @CodigoEstoque ";
+                using FbCommand cmdUpdate = new(QueryUpdate, fbConnection);
+                cmdUpdate.Parameters.AddWithValue(@"CodigoEstoque", estoqueModel.CodigoEstoque);
+                cmdUpdate.Parameters.AddWithValue(@"QuantidadeEstoque", estoqueModel.QuantidadeEstoque);
+                cmdUpdate.ExecuteNonQuery();
+            }
+            finally
+            {
+                FirebirdConnection.CloseConnection(fbConnection);
+            }
+
+
         }
 
         public List<EstoqueModel> Listar()
@@ -83,10 +100,10 @@ namespace REPOSITORY.Estoque
                         Produto = new ProdutoModel()
                         {
                             CodigoProduto = reader.GetInt32(CodigoProdutoOrdinal),
-                            NomeProduto  = reader.GetString(NomeProdutoOrdinal),
+                            NomeProduto = reader.GetString(NomeProdutoOrdinal),
                             ValorProduto = reader.GetDecimal(ValorProdutoOrdinal),
                             Disponibilidade = (DisponibilidadeEnum)reader.GetInt32(DisponibilidadeOrdinal)
-                           
+
                         }
 
                     };
@@ -102,5 +119,6 @@ namespace REPOSITORY.Estoque
                 FirebirdConnection.CloseConnection(fbConnection);
             }
         }
+
     }
 }

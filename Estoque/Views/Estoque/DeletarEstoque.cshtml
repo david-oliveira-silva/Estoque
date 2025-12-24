@@ -5,7 +5,10 @@
 	ViewData["Title"] = "Deletar estoque";
 }
 
-
+@if (TempData["Erro"] != null)
+{
+	<p class="alert alert-danger">@TempData["Erro"]</p>
+}
 
 <form asp-controller="Estoque" asp-action="DeletarEstoque" method="post">
 	
@@ -18,7 +21,7 @@
 		<div class="col">
 			<label asp-for="Estoque.CodigoEstoque">Produtos</label>
 			<input asp-for= "Estoque.Produto.NomeProduto" type="text" class="form-control" disabled>
-		</div
+		</div>
 		<div class="col">
 			<label asp-for="Estoque.CodigoEstoque">Produtos</label>
 			<input asp-for= "Estoque.QuantidadeEstoque" type="text" class="form-control" disabled>
