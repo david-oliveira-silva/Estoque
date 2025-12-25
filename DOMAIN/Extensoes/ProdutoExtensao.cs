@@ -7,7 +7,7 @@ namespace DOMAIN.Extensoes
     {
         public static void ValidarProduto(this ProdutoModel produto)
         {
-            
+
             if (string.IsNullOrWhiteSpace(produto.NomeProduto))
             {
                 throw new Exception("Nome não pode ser vazio");
@@ -26,7 +26,6 @@ namespace DOMAIN.Extensoes
             {
                 throw new Exception("Produto inválido ou não encontrado para esta operação.");
             }
-
-        }
+        }  
     }
 }

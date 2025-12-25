@@ -55,14 +55,13 @@ namespace Web.Controllers.Estoque
             {
                 _estoqueService.DeletarEstoque(viewModel.Estoque);
                 TempData["Sucesso"] = "Estoque deletado com sucesso";
-                return RedirectToAction("ListarEstoque");
             }
             catch (Exception ex)
             {
                 TempData["Erro"] = ex.Message;
-                return View(viewModel);
-
+                viewModel.Produto = _produtoService.ListarProdutos();
             }
+            return RedirectToAction("ListarEstoque");
         }
 
         public IActionResult ListarEstoque()
@@ -87,8 +86,8 @@ namespace Web.Controllers.Estoque
             try
             {
                 _estoqueService.Adicionar(codigo, quantidade);
-                TempData["Sucesso"] = $"Foi adicionado {quantidade} ao estoque";
-               return RedirectToAction("ListarEstoque");
+                TempData["Sucesso"] = $"Foi adicionado {quantidade} unidades ao estoque";
+                return RedirectToAction("ListarEstoque");
             }
             catch (Exception ex)
             {
@@ -99,7 +98,37 @@ namespace Web.Controllers.Estoque
                 };
                 return View(viewModel);
             }
-           
+
+        }
+
+        [HttpGet]
+        public IActionResult SaidaEstoque()
+        {
+            ViewModel viewModel = new()
+            {
+                Produto = _produtoService.ListarProdutos()
+            };
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        public IActionResult SaidaEstoque(int codigo, int quantidade)
+        {
+            try
+            {
+                _estoqueService.Remover(codigo,quantidade);
+                TempData["Sucesso"] = $"Foi removido {quantidade} unidades do estoque";
+                return RedirectToAction("ListarEstoque");
+            }
+            catch (Exception ex)
+            {
+                TempData["Erro"] = ex.Message;
+                ViewModel viewModel = new()
+                {
+                    Produto = _produtoService.ListarProdutos()
+                };
+                return View(viewModel);
+            }
         }
     }
 }

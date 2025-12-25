@@ -2,7 +2,7 @@
 {
     public enum DisponibilidadeEnum
     {
-        DISPONIVEL = 1,
-        INDISPONIVEL = 0
+        DISPONÍVEL = 1,
+        INDISPONÍVEL = 0
     }
 }

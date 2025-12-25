@@ -13,8 +13,6 @@ namespace REPOSITORY.Estoque
             fbConnection = FirebirdConnection.GetFbConnection();
         }
 
-
-
         public void Cadastrar(EstoqueModel estoqueModel)
         {
             try
@@ -27,7 +25,6 @@ namespace REPOSITORY.Estoque
                 cmdInsert.Parameters.AddWithValue(@"CodigoProduto", estoqueModel.CodigoProduto);
                 cmdInsert.Parameters.AddWithValue(@"QuantidadeEstoque", estoqueModel.QuantidadeEstoque);
                 cmdInsert.ExecuteNonQuery();
-
             }
             finally
             {
@@ -68,8 +65,6 @@ namespace REPOSITORY.Estoque
             {
                 FirebirdConnection.CloseConnection(fbConnection);
             }
-
-
         }
 
         public List<EstoqueModel> Listar()
@@ -103,13 +98,9 @@ namespace REPOSITORY.Estoque
                             NomeProduto = reader.GetString(NomeProdutoOrdinal),
                             ValorProduto = reader.GetDecimal(ValorProdutoOrdinal),
                             Disponibilidade = (DisponibilidadeEnum)reader.GetInt32(DisponibilidadeOrdinal)
-
                         }
-
                     };
-
                     listarEstoque.Add(estoque);
-
                 }
 
                 return listarEstoque;
@@ -119,6 +110,5 @@ namespace REPOSITORY.Estoque
                 FirebirdConnection.CloseConnection(fbConnection);
             }
         }
-
     }
 }

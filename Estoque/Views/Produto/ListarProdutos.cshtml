@@ -32,20 +32,19 @@
 			<th class="text-center" scope="col">Opções</th>
 		</tr>
 	</thead>
-	@foreach (var p in Model)
-	{
-		<tbody>
+	<tbody>
+		@foreach (var p in Model)
+		{
 			<tr>
 				<th class="text-center">@p.CodigoProduto</th>
 				<td class="text-center">@p.NomeProduto</td>
-				<td class="text-center">@p.ValorProduto R$</td>
+				<td class="text-center">@((p.ValorProduto ?? 0).ToString("C"))</td>
 				<td class="text-center">@p.Disponibilidade</td>
 				<td class="text-center">
 					<a class="btn btn-primary fw-bold" asp-controller="Produto" asp-action="UpsertProduto" asp-route-codigo="@p.CodigoProduto">Editar</a>
 					<a class="btn btn-danger fw-bold" asp-controller="Produto" asp-action="DeletarProduto" asp-route-codigo="@p.CodigoProduto">Deletar</a>
 				</td>
 			</tr>
-
-		</tbody>
-	}
+		}
+	</tbody>
 </table>

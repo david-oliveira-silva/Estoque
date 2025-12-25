@@ -82,13 +82,13 @@ namespace Web.Controllers.Produto
             {
                 produtoService.DeletarProduto(produto);
                 TempData["Sucesso"] = "Produto deletado com sucesso";
-                return RedirectToAction("ListarProdutos");
             }
             catch (Exception ex)
             {
                 TempData["Erro"] = ex.Message;
-                return View(produto);
+               
             }
+            return RedirectToAction("ListarProdutos");
         }
         [HttpGet]
         public IActionResult ListarProdutos()
