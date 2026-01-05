@@ -94,7 +94,8 @@ namespace REPOSITORY.Produto
 
                 while (Reader.Read())
                 {
-                    ProdutoModel produto = new() {
+                    ProdutoModel produto = new()
+                    {
                         CodigoProduto = Reader.GetInt32(CodigoOrdinal),
                         NomeProduto = Reader.GetString(NomeOrdinal),
                         ValorProduto = Reader.GetDecimal(ValorOrdinal),
@@ -107,6 +108,45 @@ namespace REPOSITORY.Produto
             finally
             {
                 FirebirdConnection.CloseConnection(fbConnection);
+            }
+        }
+
+        public List<ProdutoModel> BuscarNomeProduto(string? NomeProduto)
+        {
+            fbConnection.Open();
+
+            try
+            {
+                List<ProdutoModel> listaProduto = [];
+
+                string queryBusca = "SELECT * FROM PRODUTOS WHERE NomeProduto LIKE UPPER(@NomeProduto)";
+
+                using FbCommand cmdBusca = new(queryBusca, fbConnection);
+
+                cmdBusca.Parameters.AddWithValue(@"NomeProduto", $"%{NomeProduto}%");
+                using var Reader = cmdBusca.ExecuteReader();
+
+                int CodigoOrdinal = Reader.GetOrdinal("CodigoProduto");
+                int ValorOrdinal = Reader.GetOrdinal("ValorProduto");
+                int NomeOrdinal = Reader.GetOrdinal("NomeProduto");
+                int DisponibilidadeOrdinal = Reader.GetOrdinal("Disponibilidade");
+                while (Reader.Read())
+                {
+
+                    ProdutoModel produto = new()
+                    {
+                        CodigoProduto = Reader.GetInt32(CodigoOrdinal),
+                        NomeProduto = Reader.GetString(NomeOrdinal),
+                        ValorProduto = Reader.GetDecimal(ValorOrdinal),
+                        Disponibilidade = (DisponibilidadeEnum)Reader.GetInt32(DisponibilidadeOrdinal)
+                    };
+                    listaProduto.Add(produto);
+                }
+                return listaProduto;
+            }
+            finally
+            {
+                fbConnection.Close();
             }
         }
     }

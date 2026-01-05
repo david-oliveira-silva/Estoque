@@ -55,7 +55,7 @@ namespace Web.Controllers.Produto
             catch (Exception ex)
             {
                 TempData["Erro"] = ex.Message;
-                 View("UpsertProduto", produto);
+                View("UpsertProduto", produto);
             }
             return View("UpsertProduto", produto);
         }
@@ -86,15 +86,25 @@ namespace Web.Controllers.Produto
             catch (Exception ex)
             {
                 TempData["Erro"] = ex.Message;
-               
+
             }
             return RedirectToAction("ListarProdutos");
         }
         [HttpGet]
-        public IActionResult ListarProdutos()
+        public IActionResult ListarProdutos(string? NomeProduto)
         {
-            List<ProdutoModel> produtos = produtoService.ListarProdutos();
-            return View(produtos);
+            List<ProdutoModel> produtos;
+
+            if (string.IsNullOrEmpty(NomeProduto)){
+
+                produtos = produtoService.ListarProdutos();
+            }
+            else
+            {
+                produtos = produtoService.BuscarProdutoPorNome(NomeProduto);
+            }
+                return View(produtos);
         }
+
     }
 }

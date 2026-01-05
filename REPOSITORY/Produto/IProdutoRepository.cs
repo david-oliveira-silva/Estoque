@@ -5,5 +5,6 @@ namespace REPOSITORY.Produto
 {
     public interface IProdutoRepository : IGeneric<ProdutoModel>
     {
+        List<ProdutoModel> BuscarNomeProduto(string? NomeProduto);
     }
 }

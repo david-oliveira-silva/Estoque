@@ -43,4 +43,9 @@ public class ProdutoService(IProdutoRepository produtoRepository,IEstoqueReposit
         ProdutoModel? produto = _produtoRepository.Listar().FirstOrDefault(p => p.CodigoProduto == codigo);
         return produto;
     }
+
+    public List<ProdutoModel> BuscarProdutoPorNome(string NomeProduto) { 
+    
+        return _produtoRepository.BuscarNomeProduto(NomeProduto);
+    }
 }
