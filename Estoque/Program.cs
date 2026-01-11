@@ -1,7 +1,10 @@
+using DOMAIN.Model;
 using Microsoft.AspNetCore.Localization;
+using REPOSITORY.Aluno;
 using REPOSITORY.Data;
 using REPOSITORY.Estoque;
 using REPOSITORY.Produto;
+using SERVICE.Aluno;
 using SERVICE.Estoque;
 using SERVICE.Produto;
 using System.Globalization;
@@ -40,6 +43,9 @@ namespace Web
 
             builder.Services.AddScoped<IEstoqueRepository, EstoqueRepository>();
             builder.Services.AddScoped<EstoqueService, EstoqueService>();
+
+            builder.Services.AddScoped<IAlunoRepository,AlunoRepository>();
+            builder.Services.AddScoped<AlunoService, AlunoService>();
 
             var app = builder.Build();
             app.UseRequestLocalization();

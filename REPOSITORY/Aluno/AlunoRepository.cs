@@ -19,7 +19,7 @@ namespace REPOSITORY.Aluno
             {
                 FirebirdConnection.OpenConnection(fbConnection);
 
-                string QueryInsert = "INSERT INTO ALUNOS(MATRICULA,ALUNONOME,DATANASCIMENTO,SEXO,CPF) VALUES(@MATRICULA,@ALUNONOME,@DATANASCIMENTO,@SEXO,@CPF)";
+                string QueryInsert = "INSERT INTO ALUNO(MATRICULA,ALUNONOME,DATANASCIMENTO,SEXO,CPF) VALUES(@MATRICULA,@ALUNONOME,@DATANASCIMENTO,@SEXO,@CPF)";
                 using FbCommand cmdInsert = new(QueryInsert, fbConnection);
 
                 cmdInsert.Parameters.AddWithValue("@MATRICULA", alunoModel.Matricula);
