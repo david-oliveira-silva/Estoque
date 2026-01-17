@@ -1,0 +1,49 @@
+﻿@using DOMAIN.Model
+@model List<AlunoModel>
+@{
+	ViewData["Title"] = "Listar Alunos";
+}
+
+<link href="~/css/Aluno/Aluno.css" rel="stylesheet" />
+<div class="d-flex justify-content-center justify-content-between m-1">
+	<h1>Lista De Alunos</h1>
+	<a class="btn btn-primary fw-bold  asp-controller = "Aluno" asp-action = "UpsertAluno" style="height:45px">Cadastrar Aluno</a>
+</div>
+
+<div class="tabela">
+
+	<table class="table">
+		<thead>
+			<tr class="table table-dark">
+				<th class="text-center col-matricula">Matrícula</th>
+				<th class="text-center col-nome">Nome</th>
+				<th class="text-center col-nascimento">Data de nascimento</th>
+				<th class="text-center col-sexo">Sexo</th>
+				<th class="text-center col-cpf">CPF</th>
+				<th class="text-center">Opções</th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (AlunoModel a in Model)
+			{
+				<tr>
+					<td class="text-center fw-bold">@a.Matricula</td>
+					<td class="text-center">@a.Nome</td>
+					<td class="text-center">@a.DataNascimento</td>
+					<td class="text-center">@a.DataNascimento</td>
+					<td class="text-center">@a.CPF</td>
+					<td>
+						<div class="Botoes d-flex flex-lg-wrap gap-2">
+							<a class="btn btn-success fw-bold" asp-controller="Aluno" asp-action="UpsertAluno" asp-route-matricula="@a.Matricula">Editar</a>
+
+							<form asp-controller = "Aluno" asp-action = "DeletarAluno" method="post">
+								<button class="btn btn-danger fw-bold" value="">Deletar </button>
+							</form>	
+						</div>
+					</td>
+				</tr>
+			}
+		</tbody>
+
+	</table>
+</div>

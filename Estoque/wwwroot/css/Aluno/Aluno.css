@@ -1,0 +1,19 @@
+﻿.col-matricula {
+    width: 10%;
+}
+
+.col-nome {
+    width: 20%;
+}
+
+.col-nascimento {
+    width: 15%;
+}
+
+.col-sexo {
+    width: 20%;
+}
+
+.col-cpf {
+    width: 20%;
+}

@@ -1,7 +1,7 @@
 ﻿@using DOMAIN.Model
 @model AlunoModel
 @{
-    ViewData["Title"] = "Cadastrar Aluno";
+    ViewData["Title"] = (Model.Matricula == 0 ? "Cadastrar Aluno" : "Editar Aluno" );
 }
 @if (TempData["Sucesso"] != null)
 {
@@ -13,12 +13,12 @@
 }
 
 <div class="Titulo d-flex justify-content-center">
-    <h1>Cadastro de aluno</h1>
+    <h1>@(Model.Matricula == 0 ? "Cadastrar Aluno" : "Editar Aluno")</h1>
 </div>
 
 
 
-<form asp-action="CadastrarAluno" asp-controller = "Aluno" method="post">
+<form asp-action=@(Model.Matricula == 0 ? "CadastrarAluno" : "EditarAluno") asp-controller = "Aluno" method="post">
 
     <div class="form-group">
         <label asp-for="Matricula">Matricula</label>

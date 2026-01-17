@@ -9,10 +9,24 @@ namespace Web.Controllers.Aluno
         readonly AlunoService _alunoService = alunoService;
 
         [HttpGet]
-        public IActionResult CadastrarAluno()
+        public IActionResult UpsertALuno(int matricula)
         {
-            AlunoModel? aluno = new();
-            return View();
+            AlunoModel? aluno;
+            if (matricula != 0)
+            {
+                aluno = _alunoService.BuscarAluno(matricula);
+                return View(aluno);
+            }
+            else
+            {
+                aluno = new()
+                {
+                    Matricula = _alunoService.ObterProximaMatriculaDisponivel()
+                };
+
+                return View(aluno);
+            }
+
         }
 
         [HttpPost]
@@ -22,13 +36,24 @@ namespace Web.Controllers.Aluno
             {
                 _alunoService.Cadastrar(aluno);
                 TempData["Sucesso"] = "Aluno cadastrado com sucesso";
-               return RedirectToAction("ListarAlunos");
+                return RedirectToAction("ListarAlunos");
             }
-catch (Exception ex) {
+            catch (Exception ex)
+            {
 
                 TempData["Erro"] = ex.Message;
                 return View(aluno);
             }
+        }
+
+        [HttpGet]
+        public IActionResult ListarAluno()
+        {
+            List<AlunoModel> aluno;
+
+            aluno = _alunoService.Listar();
+            return View(aluno);
+
         }
     }
 }
