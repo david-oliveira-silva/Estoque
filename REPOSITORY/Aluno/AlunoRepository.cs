@@ -34,13 +34,29 @@ namespace REPOSITORY.Aluno
                 FirebirdConnection.CloseConnection(fbConnection);
             }
         }
-
-        public void Deletar(AlunoModel Entity)
+        public void Editar(AlunoModel alunoModel)
         {
-            throw new NotImplementedException();
+            try
+            {
+                FirebirdConnection.OpenConnection(fbConnection);
+
+                string queryUpdate = "UPDATE ALUNO SET ALUNONOME = @ALUNONOME,DATANASCIMENTO = @DATANASCIMENTO, SEXO = @SEXO,CPF = @CPF WHERE MATRICULA = @MATRICULA";
+
+                using FbCommand cmdUpdate = new(queryUpdate, fbConnection);
+                cmdUpdate.Parameters.AddWithValue(@"ALUNONOME", alunoModel.Nome);
+                cmdUpdate.Parameters.AddWithValue(@"DATANASCIMENTO", alunoModel.DataNascimento);
+                cmdUpdate.Parameters.AddWithValue(@"SEXO", alunoModel.Sexo);
+                cmdUpdate.Parameters.AddWithValue(@"CPF", alunoModel.CPF);
+                cmdUpdate.Parameters.AddWithValue(@"MATRICULA",alunoModel.Matricula);
+                cmdUpdate.ExecuteNonQuery();
+            }
+            finally
+            {
+                FirebirdConnection.CloseConnection(fbConnection);
+            }
         }
 
-        public void Editar(AlunoModel Entity)
+        public void Deletar(AlunoModel Entity)
         {
             throw new NotImplementedException();
         }
@@ -57,21 +73,20 @@ namespace REPOSITORY.Aluno
                 using FbCommand cmdSelect = new(QuerySelect, fbConnection);
                 using var Reader = cmdSelect.ExecuteReader();
 
+                int MatriculaOrdinal = Reader.GetOrdinal("Matricula");
+                int NomeOrdinal = Reader.GetOrdinal("AlunoNome");
+                int DataOrdinal = Reader.GetOrdinal("DataNascimento");
+                int SexoOrdinal = Reader.GetOrdinal("Sexo");
+                int CPFOrdinal = Reader.GetOrdinal("CPF");
                 while (Reader.Read())
                 {
-                    int MatriculaOrdinal = Reader.GetOrdinal("Matricula");
-                    int NomeOrdinal = Reader.GetOrdinal("AlunoNome");
-                    int DataOrdinal = Reader.GetOrdinal("DataNascimento");
-                    int SexoOrdinal = Reader.GetOrdinal("Sexo");
-                    int CPFOrdinal = Reader.GetOrdinal("CPF");
-
                     AlunoModel aluno = new()
                     {
-                        Matricula = Reader.GetInt32(MatriculaOrdinal),
-                        Nome = Reader.GetString(NomeOrdinal),
-                        DataNascimento = DateOnly.FromDateTime(Reader.GetDateTime(DataOrdinal)),
-                        Sexo = (SexoEnum)Reader.GetInt32(SexoOrdinal),
-                        CPF = Reader.GetString(CPFOrdinal)
+                        Matricula = Reader.IsDBNull(MatriculaOrdinal) ? 0 : Reader.GetInt32(MatriculaOrdinal),
+                        Nome = Reader.IsDBNull(NomeOrdinal) ? null : Reader.GetString(NomeOrdinal),
+                        DataNascimento = Reader.IsDBNull(DataOrdinal) ? null : DateOnly.FromDateTime(Reader.GetDateTime(DataOrdinal)),
+                        Sexo = Reader.IsDBNull(SexoOrdinal) ? null : (SexoEnum)Reader.GetInt32(SexoOrdinal),
+                        CPF = Reader.IsDBNull(CPFOrdinal) ? null : Reader.GetString(CPFOrdinal)
                     };
                     ListaAluno.Add(aluno);
                 }

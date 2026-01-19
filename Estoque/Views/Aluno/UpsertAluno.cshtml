@@ -1,7 +1,7 @@
 ﻿@using DOMAIN.Model
 @model AlunoModel
 @{
-    ViewData["Title"] = (Model.Matricula == 0 ? "Cadastrar Aluno" : "Editar Aluno" );
+    ViewData["Title"] = (Model.AlunoNovo == true ? "Cadastrar Aluno" : "Editar Aluno" );
 }
 @if (TempData["Sucesso"] != null)
 {
@@ -13,16 +13,24 @@
 }
 
 <div class="Titulo d-flex justify-content-center">
-    <h1>@(Model.Matricula == 0 ? "Cadastrar Aluno" : "Editar Aluno")</h1>
+    <h1>@(Model.AlunoNovo == true ? "Cadastrar Aluno" : "Editar Aluno")</h1>
 </div>
 
 
 
-<form asp-action=@(Model.Matricula == 0 ? "CadastrarAluno" : "EditarAluno") asp-controller = "Aluno" method="post">
+<form asp-action=@(Model.AlunoNovo == true ? "CadastrarAluno" : "EditarAluno") asp-controller="Aluno" method="post">
 
     <div class="form-group">
         <label asp-for="Matricula">Matricula</label>
-        <input asp-for="Matricula" class="form-control" placeholder="Digite o número da matrícula" />
+        @if(Model.AlunoNovo == true)
+        {
+            <input asp-for="Matricula" class="form-control" placeholder="Digite o número da matrícula" />
+        }
+        else
+        {
+            <input asp-for="Matricula" class="form-control" disabled/>
+
+        }
         <span asp-validation-for="Matricula" class="text-danger"></span>
     </div>
 
@@ -54,8 +62,8 @@
     </div>
 
     <div id="Botoes" class="d-flex g-2 justify-content-center gap-2">
-        <button type="submit" class="btn btn-primary" style="width:250px">Cadastrar</button>
-        <a asp-controller ="Aluno" asp-action = "ListarAluno" class="btn btn-success" style="width:250px">Voltar</a>
+        <button type="submit" class="btn btn-primary fw-bold" style="width:250px">@(Model.AlunoNovo == true ? "Cadastrar" : "Editar")</button>
+        <a asp-controller ="Aluno" asp-action = "ListarAluno" class="btn btn-success fw-bold" style="width:250px">Voltar</a>
     </div>
 
 </form>

@@ -18,7 +18,6 @@ namespace DOMAIN.Extensoes
             {
                 throw new ArgumentException("Data de nascimento não pode ser maior que a data atual");
             }
-
         }
 
         public static void AlunoExiste(this AlunoModel alunoModel)

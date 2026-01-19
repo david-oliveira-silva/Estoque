@@ -5,8 +5,8 @@ namespace DOMAIN.Model
     public class AlunoModel : Pessoa
     {
         public int Matricula { get; set; }
+        public bool AlunoNovo {  get; set; }
 
-   
         public AlunoModel()
         {
 

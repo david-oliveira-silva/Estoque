@@ -14,16 +14,27 @@ namespace Web.Controllers.Aluno
             AlunoModel? aluno;
             if (matricula != 0)
             {
+
                 aluno = _alunoService.BuscarAluno(matricula);
+
+                if (aluno == null)
+                {
+
+                    TempData["Erro"] = "Aluno não encontrado";
+                    return RedirectToAction("ListarAluno");
+                }
+
+                aluno.AlunoNovo = false;
                 return View(aluno);
+
             }
             else
             {
                 aluno = new()
                 {
-                    Matricula = _alunoService.ObterProximaMatriculaDisponivel()
+                    Matricula = _alunoService.ObterProximaMatriculaDisponivel(),
+                    AlunoNovo = true
                 };
-
                 return View(aluno);
             }
 
@@ -36,7 +47,7 @@ namespace Web.Controllers.Aluno
             {
                 _alunoService.Cadastrar(aluno);
                 TempData["Sucesso"] = "Aluno cadastrado com sucesso";
-                return RedirectToAction("ListarAlunos");
+                return RedirectToAction("ListarAluno");
             }
             catch (Exception ex)
             {
