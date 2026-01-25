@@ -56,9 +56,21 @@ namespace REPOSITORY.Aluno
             }
         }
 
-        public void Deletar(AlunoModel Entity)
+        public void Deletar(AlunoModel aluno)
         {
-            throw new NotImplementedException();
+            try
+            {
+                FirebirdConnection.OpenConnection(fbConnection);
+
+                string queryDelete = "DELETE FROM ALUNO WHERE MATRICULA = @MATRICULA";
+                using FbCommand cmdDelete = new(queryDelete, fbConnection);
+                cmdDelete.Parameters.AddWithValue(@"Matricula", aluno.Matricula);
+                cmdDelete.ExecuteNonQuery();
+            }
+            finally
+            {
+                FirebirdConnection.CloseConnection(fbConnection);
+            }
         }
 
         public List<AlunoModel> Listar()

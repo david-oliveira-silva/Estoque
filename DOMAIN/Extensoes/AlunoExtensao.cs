@@ -1,4 +1,4 @@
-﻿using DOMAIN.Model;
+﻿ using DOMAIN.Model;
 
 namespace DOMAIN.Extensoes
 {
@@ -17,6 +17,15 @@ namespace DOMAIN.Extensoes
             if (alunoModel.DataNascimento > DateOnly.FromDateTime(DateTime.Now))
             {
                 throw new ArgumentException("Data de nascimento não pode ser maior que a data atual");
+            }
+            
+            if(alunoModel.DataNascimento == null)
+            {
+                throw new ArgumentException("Data de nascimento não pode ser nula");
+            }
+            if(alunoModel.Sexo == null)
+            {
+                throw new ArgumentException("Data de nascimento não pode ser nula");
             }
         }
 

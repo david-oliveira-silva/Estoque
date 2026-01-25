@@ -14,6 +14,19 @@ namespace SERVICE.Aluno
             _alunoRepository.Cadastrar(aluno);
         }
 
+        public void Editar(AlunoModel aluno)
+        {
+            aluno.AlunoExiste();
+            aluno.ValidarALuno();
+            _alunoRepository.Editar(aluno);
+        }
+
+        public void Deletar(AlunoModel aluno)
+        {
+            aluno.AlunoExiste();
+            _alunoRepository.Deletar(aluno);
+        }
+
         public List<AlunoModel> Listar()
         {
             List<AlunoModel> aluno = [.. _alunoRepository.Listar().OrderBy(a => a.Matricula)];

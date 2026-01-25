@@ -3,7 +3,14 @@
 @{
 	ViewData["Title"] = "Listar Alunos";
 }
-
+@if (TempData["Sucesso"] != null)
+{
+	<p class="alert alert-success">@TempData["Sucesso"]</p>
+}
+@if (TempData["Erro"] != null)
+{
+	<p class="alert alert-danger">@TempData["Erro"]</p>
+}
 <link href="~/css/Aluno/Aluno.css" rel="stylesheet" />
 <div class="d-flex justify-content-center justify-content-between m-1">
 	<h1>Lista de Alunos</h1>
@@ -34,11 +41,8 @@
 					<td class="text-center">@a.CPF</td>
 					<td>
 						<div class="Botoes d-flex flex-lg-wrap gap-2">
-							<a class="btn btn-success fw-bold" asp-controller="Aluno" asp-action="UpsertAluno" asp-route-matricula="@a.Matricula">Editar</a>
-
-							<form asp-controller = "Aluno" asp-action = "DeletarAluno" method="post">
-								<button class="btn btn-danger fw-bold" value="">Deletar </button>
-							</form>	
+							<a class="btn btn-primary fw-bold" asp-controller="Aluno" asp-action="UpsertAluno" asp-route-matricula="@a.Matricula">Editar</a>
+							<a class="btn btn-danger fw-bold" asp-controller="Aluno" asp-action="DeletarAluno" asp-route-matricula="@a.Matricula">Deletar</a>
 						</div>
 					</td>
 				</tr>

@@ -9,8 +9,11 @@ namespace DOMAIN.Model
     {
         [Required(ErrorMessage = "O nome é obrigatório.")]
         [StringLength(100,MinimumLength = 3, ErrorMessage = "O nome não pode exceder 100 caracteres.")]
-        public string? Nome { get; set; } 
-        public DateOnly? DataNascimento { get; set; } 
+        public string? Nome { get; set; }
+
+        [Required(ErrorMessage = "Data de nascimento não pode ser nula")]
+        public DateOnly? DataNascimento { get; set; }
+        [Required(ErrorMessage = "selecione o  não pode ser nulo")]
         public SexoEnum? Sexo { get; set; } 
         public string? CPF { get; set; }
 
