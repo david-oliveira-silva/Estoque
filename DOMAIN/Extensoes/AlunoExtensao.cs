@@ -27,6 +27,8 @@ namespace DOMAIN.Extensoes
             {
                 throw new ArgumentException("Data de nascimento não pode ser nula");
             }
+
+           alunoModel.Nome =  alunoModel.Nome.ToUpper().Trim();
         }
 
         public static void AlunoExiste(this AlunoModel alunoModel)

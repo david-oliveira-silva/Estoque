@@ -68,7 +68,7 @@ namespace Web
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Produto}/{action=ListarProdutos}/{id?}");
+                pattern: "{controller=Aluno}/{action=ListarAluno}/{id?}");
 
             app.Run();
         }
